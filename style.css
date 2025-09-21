@@ -23,7 +23,7 @@
     /* 폰트 이름을 `@font-face`와 동일하게 설정 */
     --font-family: 'KoddiudOngodic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
-    font-size: 26px; /* 데스크톱 기본 폰트 크기 설정 */
+    font-size: 24px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
 /* ----------------------------------------------------
