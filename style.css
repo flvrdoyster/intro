@@ -123,10 +123,13 @@ body {
 
 .options-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* 버튼을 가로로 정렬합니다. */
+    justify-content: center; /* 버튼들을 가로 방향으로 중앙에 정렬합니다. */
+    align-items: flex-start; /* 버튼들을 세로 방향으로 상단에 정렬합니다. */
+    flex-wrap: wrap; /* 버튼 개수가 많아지면 다음 줄로 넘어갑니다. */
     gap: 1rem;
-    max-height: 30vh; /* 스크롤 방지를 위해 min-height를 제거하고 max-height를 vh 단위로 제한 */
-    width: 33.333%;
+    min-height: 150px;
+    width: 90%; /* 버튼이 가로로 정렬될 공간을 확보하기 위해 너비를 늘립니다. */
     margin: 0 auto;
 }
 
