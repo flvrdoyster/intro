@@ -94,6 +94,7 @@ body {
     padding-right: 15px;
     width: 80%; /* 텍스트 영역의 너비 설정 */
     margin: 0 auto; /* 텍스트 영역을 가운데 정렬 */
+    margin-top: 2vh;
 }
 
 .story-text::-webkit-scrollbar {
