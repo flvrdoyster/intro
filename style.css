@@ -13,21 +13,14 @@
   'Koddi UD OnGothic' 폰트를 로드합니다.
 ---------------------------------------------------- */
 @font-face {
-    font-family: 'KoddiudOngodic';
+    font-family: 'Koddi UD OnGothic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
     font-weight: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'KoddiudOngodic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Bold.woff') format('woff');
-    font-weight: 700;
-    font-display: swap;
+    font-style: normal;
 }
 
 :root {
-    --font-family: 'KoddiudOngodic', sans-serif;
+    --font-family: 'Koddi UD OnGothic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
     font-size: 24px; /* 데스크톱 기본 폰트 크기 설정 */
 }
@@ -48,7 +41,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 1vh; /* 패딩을 vh 단위로 변경하여 세로 스크롤 방지 */
+    padding: 1vh;
     flex-direction: column;
 }
 
@@ -71,7 +64,7 @@ body {
     background-color: #1e1e1e;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    padding: 1.5vh 20px; /* 패딩을 vh 단위와 px 조합으로 변경 */
+    padding: 1.5vh 20px;
     display: none;
     flex-direction: column;
     gap: 1.5rem;
@@ -79,7 +72,7 @@ body {
 
 .image-container {
     width: 100%;
-    max-height: 40vh; /* 이미지 최대 높이를 브라우저 높이의 40%로 제한 */
+    max-height: 40vh;
     height: auto;
     aspect-ratio: 16 / 9;
     border-radius: 8px;
@@ -94,7 +87,8 @@ body {
 .story-text {
     font-size: var(--main-font-size);
     line-height: 1.6;
-    max-height: 25vh; /* 스크롤 방지를 위해 min-height를 제거하고 max-height를 vh 단위로 제한 */
+    height: auto; /* 높이를 유동적으로 설정 */
+    flex-grow: 1; /* 남은 공간을 채우도록 설정 */
     overflow-y: auto;
     white-space: pre-wrap;
     padding-right: 15px;
@@ -123,13 +117,11 @@ body {
 
 .options-container {
     display: flex;
-    flex-direction: row; /* 버튼을 가로로 정렬합니다. */
-    justify-content: center; /* 버튼들을 가로 방향으로 중앙에 정렬합니다. */
-    align-items: flex-start; /* 버튼들을 세로 방향으로 상단에 정렬합니다. */
-    flex-wrap: wrap; /* 버튼 개수가 많아지면 다음 줄로 넘어갑니다. */
+    flex-direction: column;
     gap: 1rem;
-    min-height: 150px;
-    width: 90%; /* 버튼이 가로로 정렬될 공간을 확보하기 위해 너비를 늘립니다. */
+    height: auto; /* 높이를 유동적으로 설정 */
+    flex-grow: 1; /* 남은 공간을 채우도록 설정 */
+    width: 33.333%;
     margin: 0 auto;
 }
 
@@ -137,13 +129,13 @@ body {
     background-color: #4a4a4a;
     color: #ffffff;
     font-size: var(--main-font-size);
-    font-family: var(--font-family);
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: transform 0.2s, background-color 0.2s;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-family: var(--font-family);
 }
 
 .option-button:hover {
@@ -169,6 +161,7 @@ body {
 @media (max-width: 640px) {
     :root {
         font-size: 14px;
+        --main-font-size: 1.1rem;
     }
     .game-container {
         padding: 1vh 10px;
@@ -182,18 +175,13 @@ body {
     }
     .story-text {
         font-size: var(--main-font-size);
-        line-height: 1.6;
-        height: 250px; /* 고정된 높이로 변경 */
-        overflow-y: auto;
-        white-space: pre-wrap;
-        padding-right: 15px;
     }
     .options-container {
-        max-height: 25vh;
         width: 95%;
     }
     .option-button {
         font-size: var(--main-font-size);
+        font-family: var(--font-family);
         padding: 0.6rem 1.2rem;
     }
 }
