@@ -119,13 +119,13 @@ body {
 
 .options-container {
     display: flex;
-    flex-direction: row; /* row로 변경하여 가로 정렬 */
-    justify-content: center; /* 버튼을 중앙에 정렬 (선택 사항) */
-    align-items: center; /* 버튼을 세로 중앙에 정렬 (선택 사항) */
-    flex-wrap: wrap; /* 버튼이 많아지면 다음 줄로 넘어가도록 설정 (선택 사항) */
+    flex-direction: row; /* 버튼을 가로로 정렬합니다. */
+    justify-content: center; /* 버튼들을 가로 방향으로 중앙에 정렬합니다. */
+    align-items: flex-start; /* 버튼들을 세로 방향으로 상단에 정렬합니다. */
+    flex-wrap: wrap; /* 버튼 개수가 많아지면 다음 줄로 넘어갑니다. */
     gap: 1rem;
     min-height: 150px;
-    width: 90%; /* 버튼이 좌우로 정렬될 공간을 확보하기 위해 width를 늘립니다. */
+    width: 90%; /* 버튼이 가로로 정렬될 공간을 확보하기 위해 너비를 늘립니다. */
     margin: 0 auto;
 }
 
