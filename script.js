@@ -87,6 +87,13 @@ function showPage(pageId) {
     // 이미지 업데이트
     imageContainerElement.style.backgroundImage = `url('${imageUrl}')`;
 
+    // 인트로 페이지의 경우, 시작 화면의 이미지도 설정합니다.
+    if (pageId === 'start') {
+        if (introImageContainerElement) {
+            introImageContainerElement.style.backgroundImage = `url('${imageUrl}')`;
+        }
+    }
+
     // 텍스트에 타자기 효과 적용
     typewriterEffect(textContent, () => {
         // 텍스트 표시가 완료되면 선택지 버튼을 생성하고 표시합니다.
@@ -109,8 +116,12 @@ function showPage(pageId) {
 document.addEventListener('DOMContentLoaded', () => {
     // 인트로 페이지 이미지 설정
     if (introImageContainerElement) {
-        const introImageUrl = introImageContainerElement.dataset.image;
-        introImageContainerElement.style.backgroundImage = `url('${introImageUrl}')`;
+        const template = document.getElementById('start');
+        if (template) {
+            const pageDataElement = template.content.querySelector('.page-data');
+            const introImageUrl = pageDataElement.dataset.image;
+            introImageContainerElement.style.backgroundImage = `url('${introImageUrl}')`;
+        }
     }
 
     // 시작 버튼 클릭 이벤트 설정
