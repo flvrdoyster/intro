@@ -31,45 +31,39 @@
             showPage('start');
         }
 
-        // 타자기 효과를 구현하는 함수
-        // 글자를 한 글자씩 표시하고, 완료되면 콜백 함수를 실행합니다.
-        function typewriterEffect(text, onComplete) {
-            let i = 0;
-            storyTextElement.innerHTML = '';
-            clearInterval(typingInterval);
+// 타자기 효과를 구현하는 함수
+// 글자를 한 글자씩 표시하고, 완료되면 콜백 함수를 실행합니다.
+function typewriterEffect(text, onComplete) {
+    let i = 0;
+    storyTextElement.innerHTML = '';
+    clearInterval(typingInterval);
 
-            // 소리 재생 설정
+    // 소리 재생 설정
+    if (sound) {
+        sound.pause();
+        sound.currentTime = 0; // 소리를 처음으로 되감기
+        sound.volume = 0.5;
+        sound.play().catch(e => console.error("Sound playback failed:", e));
+    }
+
+    typingInterval = setInterval(() => {
+        if (i < text.length) {
+            // 글자를 하나씩 추가
+            storyTextElement.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            // 모든 글자가 표시되면 타이머를 정지하고 커서 추가
+            clearInterval(typingInterval);
             if (sound) {
                 sound.pause();
-                sound.currentTime = 0; // 소리를 처음으로 되감기
-                sound.volume = 0.5;
-                sound.play().catch(e => console.error("Sound playback failed:", e));
             }
-
-            typingInterval = setInterval(() => {
-                if (i < text.length) {
-                    // 글자를 하나씩 추가하고 커서를 표시합니다.
-                    storyTextElement.innerHTML += text.charAt(i);
-                    storyTextElement.innerHTML += '<span class="typing-cursor">|</span>';
-                    i++;
-                    // 이전 커서를 제거하여 깜박이는 효과를 만듭니다.
-                    if (i > 0) {
-                        const cursor = storyTextElement.querySelector('.typing-cursor');
-                        if (cursor) {
-                            cursor.remove();
-                        }
-                    }
-                } else {
-                    // 모든 글자가 표시되면 타이머와 소리를 정지합니다.
-                    clearInterval(typingInterval);
-                    if (sound) {
-                        sound.pause();
-                    }
-                    // 텍스트 표시가 완료된 후 실행할 함수 호출
-                    onComplete();
-                }
-            }, 50); // 타이핑 속도 (밀리초)
+            // 텍스트 표시가 완료된 후 커서 추가
+            storyTextElement.innerHTML += '<span class="typing-cursor">|</span>';
+            // 텍스트 표시가 완료된 후 실행할 함수 호출
+            onComplete();
         }
+    }, 50); // 타이핑 속도 (밀리초)
+}
 
         // 특정 페이지의 내용을 표시하는 함수
         // HTML 템플릿에서 데이터를 가져와 화면을 업데이트합니다.
