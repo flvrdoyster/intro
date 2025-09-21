@@ -40,7 +40,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 10px; /* 패딩 값을 20px에서 10px로 줄여 여백을 확보 */
+    padding: 10px;
     flex-direction: column;
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .game-container {
-    width: 90%; /* 고정된 1600px 대신 90%로 설정하여 유연하게 변경 */
+    width: 90%;
     max-width: 1600px;
     background-color: #1e1e1e;
     border-radius: 12px;
@@ -71,8 +71,7 @@ body {
 
 .image-container {
     width: 100%;
-    /* 이미지 높이를 화면 높이에 맞춰서 조절 */
-    max-height: 40vh; 
+    max-height: 40vh;
     height: auto;
     aspect-ratio: 16 / 9;
     border-radius: 8px;

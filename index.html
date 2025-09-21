@@ -9,7 +9,7 @@
 <body>
 
     <div id="start-screen">
-        <div id="introImageContainer" class="image-container" data-image="https://placehold.co/1600x900/34495e/ffffff?text=게임북+시작+화면"></div>
+        <div id="introImageContainer" class="image-container"></div>
         <h1>게임북에 오신 것을 환영합니다!</h1>
         <p>이야기를 시작하려면 버튼을 눌러주세요.</p>
         <button id="startButton" class="option-button">게임 시작하기</button>
@@ -21,16 +21,15 @@
         <div id="optionsContainer" class="options-container"></div>
     </div>
 
-    <!-- 게임 데이터 템플릿 -->
-<template id="start">
-    <div class="page-data" data-image="https://placehold.co/1600x900/34495e/ffffff?text=어두운+숲+속">
-        <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
-        <div class="options">
-            <button data-next="page2">왼쪽 길로 간다</button>
-            <button data-next="page3">오른쪽 길로 간다</button>
+    <template id="start">
+        <div class="page-data" data-image="https://placehold.co/1600x900/34495e/ffffff?text=어두운+숲+속">
+            <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
+            <div class="options">
+                <button data-next="page2">왼쪽 길로 간다</button>
+                <button data-next="page3">오른쪽 길로 간다</button>
+            </div>
         </div>
-    </div>
-</template>
+    </template>
 
     <template id="page2">
         <div class="page-data" data-image="https://placehold.co/1600x900/2c3e50/ffffff?text=낡은+오두막">
