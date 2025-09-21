@@ -13,23 +13,30 @@
   'Koddi UD OnGothic' 폰트를 로드합니다.
 ---------------------------------------------------- */
 @font-face {
-    font-family: 'Koddi UD OnGothic';
+    font-family: 'KoddiudOngodic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
     font-weight: normal;
-    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KoddiudOngodic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
 }
 
 :root {
-    --font-family: 'Koddi UD OnGothic', sans-serif;
+    --font-family: 'KoddiudOngodic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
-    font-size: 16px; /* 데스크톱 기본 폰트 크기 설정 */
+    font-size: 24px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
 /* ----------------------------------------------------
   2. 전역 스타일 (html, body)
   전체 페이지의 배경, 글꼴, 레이아웃을 설정합니다.
 ---------------------------------------------------- */
-html, body {
+* {
     font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
 }
 
@@ -127,6 +134,7 @@ body {
     background-color: #4a4a4a;
     color: #ffffff;
     font-size: var(--main-font-size);
+    font-family: var(--font-family);
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: transform 0.2s, background-color 0.2s;
