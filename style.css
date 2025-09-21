@@ -22,7 +22,7 @@
 :root {
     --font-family: 'Koddi UD OnGothic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
-    font-size: 24px; /* 데스크톱 기본 폰트 크기 설정 */
+    font-size: 30px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
 /* ----------------------------------------------------
