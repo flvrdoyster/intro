@@ -42,7 +42,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 10px;
+    padding: 1vh; /* 패딩을 vh 단위로 변경하여 세로 스크롤 방지 */
     flex-direction: column;
 }
 
@@ -65,7 +65,7 @@ body {
     background-color: #1e1e1e;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    padding: 2rem;
+    padding: 1.5vh 20px; /* 패딩을 vh 단위와 px 조합으로 변경 */
     display: none;
     flex-direction: column;
     gap: 1.5rem;
@@ -88,8 +88,7 @@ body {
 .story-text {
     font-size: var(--main-font-size);
     line-height: 1.6;
-    min-height: 120px;
-    max-height: 300px;
+    max-height: 25vh; /* 스크롤 방지를 위해 min-height를 제거하고 max-height를 vh 단위로 제한 */
     overflow-y: auto;
     white-space: pre-wrap;
     padding-right: 15px;
@@ -120,7 +119,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-height: 150px;
+    max-height: 30vh; /* 스크롤 방지를 위해 min-height를 제거하고 max-height를 vh 단위로 제한 */
     width: 33.333%;
     margin: 0 auto;
 }
@@ -135,6 +134,7 @@ body {
     text-align: center;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-family: var(--font-family);
 }
 
 .option-button:hover {
@@ -160,14 +160,15 @@ body {
 @media (max-width: 640px) {
     :root {
         font-size: 14px;
-        --main-font-size: 1.1rem; /* 모바일 환경에서 폰트 크기 변경 */
+        --main-font-size: 1.1rem;
     }
     .game-container {
-        padding: 1.5rem;
+        padding: 1vh 10px;
         width: 95%;
         max-width: 800px;
     }
     .image-container {
+        max-height: 30vh;
         height: auto;
         aspect-ratio: 16 / 9;
     }
@@ -175,6 +176,7 @@ body {
         font-size: var(--main-font-size);
     }
     .options-container {
+        max-height: 25vh;
         width: 95%;
     }
     .option-button {
