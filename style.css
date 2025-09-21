@@ -89,6 +89,7 @@ body {
     font-size: var(--main-font-size);
     line-height: 1.6;
     height: 25vh; /* 높이를 뷰포트의 25%로 고정 */
+    width: 80%;
     overflow-y: auto;
     white-space: pre-wrap;
     padding-right: 15px;
