@@ -53,9 +53,9 @@ body {
     border-radius: 12px; }
 
 .image-container {
-    width: 100%;
-    /* 16:9 비율 유지 */
-    aspect-ratio: 16 / 9;
+    width: 100%; /* 너비를 100%로 유지하고 */
+    height: auto; /* 높이를 자동으로 조절 */
+    aspect-ratio: 16 / 9; /* 16:9 비율을 유지합니다 */
     border-radius: 8px;
     background-color: #333;
     overflow: hidden;
@@ -64,3 +64,4 @@ body {
     background-size: cover;
     background-position: center;
 }
+
