@@ -7,7 +7,7 @@
 
 :root {
     --font-family: 'Koddi UD OnGothic', sans-serif;
-    --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
+    --main-font-size: 1rem; /* 본문과 버튼의 폰트 크기를 통일 */
     font-size: 30px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
@@ -36,6 +36,7 @@ body {
     justify-content: center;
     text-align: center;
     padding: 2rem;
+    font-size: var(--main-font-size);
 }
 
 .game-container {
