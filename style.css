@@ -28,7 +28,6 @@
 /* ----------------------------------------------------
   2. 전역 스타일 (html, body)
   전체 페이지의 배경, 글꼴, 레이아웃을 설정합니다.
-  이 부분에서 모든 요소에 폰트를 일괄 적용합니다.
 ---------------------------------------------------- */
 html, body {
     font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
@@ -73,7 +72,7 @@ body {
 
 .image-container {
     width: 100%;
-    max-height: 40vh;
+    max-height: 40vh; /* 이미지 최대 높이를 브라우저 높이의 40%로 제한 */
     height: auto;
     aspect-ratio: 16 / 9;
     border-radius: 8px;
