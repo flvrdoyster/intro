@@ -10,20 +10,19 @@
 
 /* ----------------------------------------------------
   1. 웹 폰트 설정
-  'Koddi UD OnGothic' 폰트를 로드하고, 모든 페이지에 적용합니다.
+  'Koddi UD OnGothic' 폰트를 로드합니다.
 ---------------------------------------------------- */
 @font-face {
-    font-family: 'KoddiudOngodic';
+    font-family: 'Koddi UD OnGothic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
     font-weight: normal;
-    font-display: swap;
+    font-style: normal;
 }
 
 :root {
-    /* 폰트 이름을 `@font-face`와 동일하게 설정 */
-    --font-family: 'KoddiudOngodic', sans-serif;
+    --font-family: 'Koddi UD OnGothic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
-    font-size: 24px; /* 데스크톱 기본 폰트 크기 설정 */
+    font-size: 16px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
 /* ----------------------------------------------------
@@ -31,7 +30,7 @@
   전체 페이지의 배경, 글꼴, 레이아웃을 설정합니다.
   이 부분에서 모든 요소에 폰트를 일괄 적용합니다.
 ---------------------------------------------------- */
-* {
+html, body {
     font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
 }
 
@@ -119,16 +118,12 @@ body {
 
 .options-container {
     display: flex;
-    flex-direction: row; /* 버튼을 가로로 정렬합니다. */
-    justify-content: center; /* 버튼들을 가로 방향으로 중앙에 정렬합니다. */
-    align-items: flex-start; /* 버튼들을 세로 방향으로 상단에 정렬합니다. */
-    flex-wrap: wrap; /* 버튼 개수가 많아지면 다음 줄로 넘어갑니다. */
+    flex-direction: column;
     gap: 1rem;
     min-height: 150px;
-    width: 90%; /* 버튼이 가로로 정렬될 공간을 확보하기 위해 너비를 늘립니다. */
+    width: 33.333%;
     margin: 0 auto;
 }
-
 
 .option-button {
     background-color: #4a4a4a;
@@ -139,7 +134,6 @@ body {
     transition: transform 0.2s, background-color 0.2s;
     text-align: center;
     cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -185,7 +179,6 @@ body {
     }
     .option-button {
         font-size: var(--main-font-size);
-        font-family: var(--font-family);
         padding: 0.6rem 1.2rem;
     }
 }
