@@ -10,7 +10,7 @@
 
 /* ----------------------------------------------------
   1. 웹 폰트 설정
-  'Koddi UD OnGothic' 폰트를 로드합니다.
+  'Koddi UD OnGothic' 폰트를 로드하고, 모든 페이지에 적용합니다.
 ---------------------------------------------------- */
 @font-face {
     font-family: 'Koddi UD OnGothic';
@@ -20,6 +20,7 @@
 }
 
 :root {
+    /* 폰트 이름을 `@font-face`와 동일하게 설정 */
     --font-family: 'Koddi UD OnGothic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
     font-size: 16px; /* 데스크톱 기본 폰트 크기 설정 */
@@ -31,7 +32,7 @@
   이 부분에서 모든 요소에 폰트를 일괄 적용합니다.
 ---------------------------------------------------- */
 html, body {
-    font-family: var(--font-family);
+    font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
 }
 
 body {
@@ -134,6 +135,7 @@ body {
     transition: transform 0.2s, background-color 0.2s;
     text-align: center;
     cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -160,6 +162,7 @@ body {
 @media (max-width: 640px) {
     :root {
         font-size: 14px;
+        --main-font-size: 1.1rem; /* 모바일 환경에서 폰트 크기 변경 */
     }
     .game-container {
         padding: 1.5rem;
@@ -171,13 +174,13 @@ body {
         aspect-ratio: 16 / 9;
     }
     .story-text {
-        font-size: 1.2rem;
+        font-size: var(--main-font-size);
     }
     .options-container {
         width: 95%;
     }
     .option-button {
-        font-size: 1rem;
+        font-size: var(--main-font-size);
         padding: 0.6rem 1.2rem;
     }
 }
