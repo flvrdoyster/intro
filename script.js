@@ -11,6 +11,7 @@ const optionsContainerElement = document.getElementById('optionsContainer');
 const imageContainerElement = document.getElementById('imageContainer');
 const startScreenElement = document.getElementById('start-screen');
 const gameContentElement = document.getElementById('game-content');
+// 인트로 페이지 이미지 컨테이너를 캐싱합니다.
 const introImageContainerElement = document.getElementById('introImageContainer');
 let typingInterval;
 
@@ -75,16 +76,6 @@ function showPage(pageId) {
         return;
     }
 
-    // 인트로 페이지의 경우 이미지를 설정합니다.
-    if (pageId === 'start') {
-        const introImageURL = "https://placehold.co/1600x900/34495e/ffffff?text=게임북+시작+화면";
-        if (introImageContainerElement) {
-            introImageContainerElement.style.backgroundImage = `url('${introImageURL}')`;
-        }
-        // 게임 컨테이너의 이미지를 초기화합니다.
-        imageContainerElement.style.backgroundImage = 'none';
-    }
-
     // 템플릿 콘텐츠 복제 및 데이터 추출
     const pageDataElement = template.content.cloneNode(true).querySelector('.page-data');
     const textContent = pageDataElement.querySelector('p').textContent;
@@ -115,11 +106,13 @@ function showPage(pageId) {
 }
 
 // 페이지 로드 시 "게임 시작하기" 버튼에 이벤트 리스너 추가
-// 사용자가 버튼을 클릭하면 게임이 시작됩니다.
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('startButton').onclick = initGame;
-    // 초기 페이지 로드 시 인트로 이미지 표시
+    // 인트로 페이지 이미지 설정
     if (introImageContainerElement) {
-        showPage('start');
+        const introImageUrl = introImageContainerElement.dataset.image;
+        introImageContainerElement.style.backgroundImage = `url('${introImageUrl}')`;
     }
+
+    // 시작 버튼 클릭 이벤트 설정
+    document.getElementById('startButton').onclick = initGame;
 });
