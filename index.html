@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타자기 효과 게임북</title>
+    <style>
+        /* ----------------------------------------------------
+           CSS 파일 구성
+        ---------------------------------------------------- */
+        /*
+          1. 웹 폰트 설정
+          2. 전역 스타일 (body)
+          3. 레이아웃 및 컴포넌트 스타일
+          4. 반응형 디자인 (미디어 쿼리)
+        */
+
+        /* ----------------------------------------------------
+          1. 웹 폰트 설정
+          'Koddi UD OnGothic' 폰트를 로드하고, 모든 페이지에 적용합니다.
+        ---------------------------------------------------- */
+        @font-face {
+            font-family: 'Koddi UD OnGothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --font-family: 'Koddi UD OnGothic', sans-serif;
+        }
+
+        /* ----------------------------------------------------
+          2. 전역 스타일 (body)
+          전체 페이지의 배경, 글꼴, 레이아웃을 설정합니다.
+        ---------------------------------------------------- */
+        * {
+            font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
+        }
+        body {
+            background-color: #2b2b2b;
+            color: #d1d1d1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* ----------------------------------------------------
+          3. 레이아웃 및 컴포넌트 스타일
+          게임북의 각 요소(컨테이너, 이미지, 텍스트, 버튼)의 디자인을 정의합니다.
+        ---------------------------------------------------- */
+        .game-container {
+            width: 1600px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            background-color: #333;
+            overflow: hidden;
+            border: 2px solid #555;
+            transition: background-image 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            min-height: 120px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            padding-right: 15px;
+        }
+
+        .story-text::-webkit-scrollbar {
+            width: 8px;
+        }
+        .story-text::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 4px;
+        }
+        .story-text::-webkit-scrollbar-track {
+            background-color: #1e1e1e;
+        }
+
+        .typing-cursor {
+            font-weight: bold;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { color: transparent; }
+            50% { color: #d1d1d1; }
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 150px;
+            width: 33.333%;
+            margin: 0 auto;
+        }
+
+        .option-button {
+            background-color: #4a4a4a;
+            color: #ffffff;
+            font-size: 1.25rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-button:hover {
+            background-color: #636363;
+            transform: translateY(-2px);
+        }
+
+        .option-button:active {
+            transform: translateY(0);
+        }
+
+        #start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ----------------------------------------------------
+          4. 반응형 디자인 (미디어 쿼리)
+          화면 크기에 따라 레이아웃을 조절합니다.
+        ---------------------------------------------------- */
+        @media (max-width: 1600px) {
+            .game-container {
+                width: 95%;
+                max-width: 1600px;
+            }
+        }
+        @media (max-width: 640px) {
+            .game-container {
+                padding: 1.5rem;
+                width: 95%;
+                max-width: 800px;
+            }
+            .image-container {
+                height: auto;
+                aspect-ratio: 16/9;
+            }
+            .story-text {
+                font-size: 1.2rem;
+            }
+            .options-container {
+                width: 95%;
+            }
+            .option-button {
+                font-size: 1rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen">
+        <h1>게임북에 오신 것을 환영합니다!</h1>
+        <p>이야기를 시작하려면 버튼을 눌러주세요.</p>
+        <button id="startButton" class="option-button">게임 시작하기</button>
+    </div>
+
+    <div id="game-content" class="game-container">
+        <div id="imageContainer" class="image-container"></div>
+        <div id="storyText" class="story-text"></div>
+        <div id="optionsContainer" class="options-container"></div>
+    </div>
+
+    <!-- 게임 데이터 템플릿 -->
+    <template id="start">
+        <div class="page-data" data-image="https://placehold.co/1600x900/34495e/ffffff?text=어두운+숲+속">
+            <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
+            <div class="options">
+                <button data-next="page2">왼쪽 길로 간다</button>
+                <button data-next="page3">오른쪽 길로 간다</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page2">
+        <div class="page-data" data-image="https://placehold.co/1600x900/2c3e50/ffffff?text=낡은+오두막">
+            <p>당신은 왼쪽 길을 택했고, 길은 점점 더 어두워집니다. 갑자기 낡은 오두막이 눈에 들어왔습니다. 오두막에 들어가 보시겠습니까?</p>
+            <div class="options">
+                <button data-next="page4">오두막으로 들어간다</button>
+                <button data-next="page5">오두막을 지나 계속 걷는다</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page3">
+        <div class="page-data" data-image="https://placehold.co/1600x900/27ae60/ffffff?text=빛나는+숲">
+            <p>당신은 오른쪽 길을 택했고, 길은 빛으로 가득합니다. 멀리서 반짝이는 보물 상자가 보입니다. 다가가 보시겠습니까?</p>
+            <div class="options">
+                <button data-next="end_treasure">보물 상자 쪽으로 간다</button>
+                <button data-next="end_safe">다른 길을 찾아본다</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page4">
+        <div class="page-data" data-image="https://placehold.co/1600x900/8e44ad/ffffff?text=마법서">
+            <p>낡은 오두막 안으로 들어서자, 오래된 마법서가 보입니다. 마법서를 펼쳐보니 강력한 마법을 배우게 되어 당신의 모험은 성공적으로 끝났습니다! 🎉</p>
+            <div class="options">
+                <button data-next="start">다시 시작하기</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page5">
+        <div class="page-data" data-image="https://placehold.co/1600x900/c0392b/ffffff?text=낭떠러지">
+            <p>오두막을 지나 계속 걸었습니다. 하지만 길은 낭떠러지로 이어져 있었고, 당신은 발을 헛디뎌 모험을 끝내게 되었습니다. 💀</p>
+            <div class="options">
+                <button data-next="start">다시 시작하기</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="end_treasure">
+        <div class="page-data" data-image="https://placehold.co/1600x900/f1c40f/ffffff?text=황금+열쇠">
+            <p>보물 상자를 열자, 상자 안에는 빛나는 황금 열쇠가 들어있습니다. 이 열쇠는 당신의 집으로 돌아가는 문을 열어줍니다. 당신은 안전하게 집으로 돌아왔습니다! 🏡</p>
+            <div class="options">
+                <button data-next="start">다시 시작하기</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="end_safe">
+        <div class="page-data" data-image="https://placehold.co/1600x900/3498db/ffffff?text=평화로운+마을">
+            <p>빛나는 상자를 무시하고 다른 길을 찾았습니다. 길은 안전한 마을로 이어졌고, 당신은 따뜻한 환영을 받으며 새로운 삶을 시작하게 되었습니다! 😊</p>
+            <div class="options">
+                <button data-next="start">다시 시작하기</button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // JavaScript 파일 구성:
+        // 1. 전역 변수 및 DOM 요소 캐싱
+        // 2. 게임 시작 및 페이지 초기화 함수 (initGame)
+        // 3. 타자기 효과 함수 (typewriterEffect)
+        // 4. 페이지 전환 및 콘텐츠 표시 함수 (showPage)
+        // 5. 이벤트 리스너 설정
+
+        // 전역 변수 및 DOM 요소 캐싱
+        const storyTextElement = document.getElementById('storyText');
+        const optionsContainerElement = document.getElementById('optionsContainer');
+        const imageContainerElement = document.getElementById('imageContainer');
+        const startScreenElement = document.getElementById('start-screen');
+        const gameContentElement = document.getElementById('game-content');
+        let typingInterval;
+
+        // 타자기 소리 파일 경로
+        const typewriterSound = "./typewriter-1.mp3";
+        let sound;
+
+        // 게임 시작을 위한 초기화 함수
+        // 사용자의 첫 상호작용 후 호출되어 소리 재생 권한을 얻고 게임을 시작합니다.
+        function initGame() {
+            // 오디오 객체 생성
+            sound = new Audio(typewriterSound);
+
+            // 시작 화면을 숨기고 게임 화면을 표시합니다.
+            startScreenElement.style.display = 'none';
+            gameContentElement.style.display = 'flex';
+
+            // 첫 페이지를 보여줍니다.
+            showPage('start');
+        }
+
+        // 타자기 효과를 구현하는 함수
+        // 글자를 한 글자씩 표시하고, 완료되면 콜백 함수를 실행합니다.
+        function typewriterEffect(text, onComplete) {
+            let i = 0;
+            storyTextElement.innerHTML = '';
+            clearInterval(typingInterval);
+
+            // 소리 재생 설정
+            if (sound) {
+                sound.pause();
+                sound.currentTime = 0; // 소리를 처음으로 되감기
+                sound.volume = 0.5;
+                sound.play().catch(e => console.error("Sound playback failed:", e));
+            }
+
+            typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    // 글자를 하나씩 추가하고 커서를 표시합니다.
+                    storyTextElement.innerHTML += text.charAt(i);
+                    storyTextElement.innerHTML += '<span class="typing-cursor">|</span>';
+                    i++;
+                    // 이전 커서를 제거하여 깜박이는 효과를 만듭니다.
+                    if (i > 0) {
+                        const cursor = storyTextElement.querySelector('.typing-cursor');
+                        if (cursor) {
+                            cursor.remove();
+                        }
+                    }
+                } else {
+                    // 모든 글자가 표시되면 타이머와 소리를 정지합니다.
+                    clearInterval(typingInterval);
+                    if (sound) {
+                        sound.pause();
+                    }
+                    // 텍스트 표시가 완료된 후 실행할 함수 호출
+                    onComplete();
+                }
+            }, 50); // 타이핑 속도 (밀리초)
+        }
+
+        // 특정 페이지의 내용을 표시하는 함수
+        // HTML 템플릿에서 데이터를 가져와 화면을 업데이트합니다.
+        function showPage(pageId) {
+            const template = document.getElementById(pageId);
+            if (!template) {
+                console.error(`Error: Template with ID '${pageId}' not found.`);
+                return;
+            }
+
+            // 템플릿 콘텐츠 복제 및 데이터 추출
+            const pageDataElement = template.content.cloneNode(true).querySelector('.page-data');
+            const textContent = pageDataElement.querySelector('p').textContent;
+            const imageUrl = pageDataElement.dataset.image;
+
+            // 이전 선택지 제거
+            optionsContainerElement.innerHTML = '';
+
+            // 이미지 업데이트
+            imageContainerElement.style.backgroundImage = `url('${imageUrl}')`;
+
+            // 텍스트에 타자기 효과 적용
+            typewriterEffect(textContent, () => {
+                // 텍스트 표시가 완료되면 선택지 버튼을 생성하고 표시합니다.
+                const options = pageDataElement.querySelectorAll('.options button');
+                if (options.length > 0) {
+                    options.forEach(option => {
+                        const button = document.createElement('button');
+                        button.textContent = option.textContent;
+                        button.className = 'option-button';
+                        const nextId = option.dataset.next;
+                        // 버튼 클릭 시 다음 페이지를 보여주도록 이벤트 리스너 추가
+                        button.onclick = () => showPage(nextId);
+                        optionsContainerElement.appendChild(button);
+                    });
+                }
+            });
+        }
+
+        // 페이지 로드 시 "게임 시작하기" 버튼에 이벤트 리스너 추가
+        // 사용자가 버튼을 클릭하면 게임이 시작됩니다.
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('startButton').onclick = initGame;
+        });
+    </script>
+</body>
+</html>
