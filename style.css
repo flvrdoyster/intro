@@ -21,6 +21,7 @@
 
 :root {
     --font-family: 'Koddi UD OnGothic', sans-serif;
+    --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
     font-size: 16px; /* 데스크톱 기본 폰트 크기 설정 */
 }
 
@@ -84,7 +85,7 @@ body {
 }
 
 .story-text {
-    font-size: 1.5rem;
+    font-size: var(--main-font-size);
     line-height: 1.6;
     min-height: 120px;
     max-height: 300px;
@@ -126,7 +127,7 @@ body {
 .option-button {
     background-color: #4a4a4a;
     color: #ffffff;
-    font-size: 1.25rem;
+    font-size: var(--main-font-size);
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: transform 0.2s, background-color 0.2s;
