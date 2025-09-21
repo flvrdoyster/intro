@@ -33,6 +33,7 @@
         body {
             background-color: #2b2b2b;
             color: #d1d1d1;
+            font-size: 20px; /* 원하는 크기로 수정하세요. */
             display: flex;
             justify-content: center;
             align-items: center;
