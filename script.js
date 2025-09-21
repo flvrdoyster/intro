@@ -1,10 +1,3 @@
-// JavaScript 파일 구성:
-// 1. 전역 변수 및 DOM 요소 캐싱
-// 2. 게임 시작 및 페이지 초기화 함수 (initGame)
-// 3. 타자기 효과 함수 (typewriterEffect)
-// 4. 페이지 전환 및 콘텐츠 표시 함수 (showPage)
-// 5. 이벤트 리스너 설정
-
 // 전역 변수 및 DOM 요소 캐싱
 const storyTextElement = document.getElementById('storyText');
 const optionsContainerElement = document.getElementById('optionsContainer');
