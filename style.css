@@ -182,6 +182,11 @@ body {
     }
     .story-text {
         font-size: var(--main-font-size);
+        line-height: 1.6;
+        height: 250px; /* 고정된 높이로 변경 */
+        overflow-y: auto;
+        white-space: pre-wrap;
+        padding-right: 15px;
     }
     .options-container {
         max-height: 25vh;
