@@ -119,12 +119,16 @@ body {
 
 .options-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* row로 변경하여 가로 정렬 */
+    justify-content: center; /* 버튼을 중앙에 정렬 (선택 사항) */
+    align-items: center; /* 버튼을 세로 중앙에 정렬 (선택 사항) */
+    flex-wrap: wrap; /* 버튼이 많아지면 다음 줄로 넘어가도록 설정 (선택 사항) */
     gap: 1rem;
     min-height: 150px;
-    width: 33.333%;
+    width: 90%; /* 버튼이 좌우로 정렬될 공간을 확보하기 위해 width를 늘립니다. */
     margin: 0 auto;
 }
+
 
 .option-button {
     background-color: #4a4a4a;
