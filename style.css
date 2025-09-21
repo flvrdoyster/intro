@@ -50,7 +50,13 @@ body {
 .game-container {
     width: 1600px;
     background-color: #1e1e1e;
-    border-radius: 12px; }
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
 .image-container {
     width: 100%; /* 너비를 100%로 유지하고 */
