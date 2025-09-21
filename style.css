@@ -13,15 +13,15 @@
   'Koddi UD OnGothic' 폰트를 로드하고, 모든 페이지에 적용합니다.
 ---------------------------------------------------- */
 @font-face {
-    font-family: 'Koddi UD OnGothic';
+    font-family: 'KoddiudOngodic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
     font-weight: normal;
-    font-style: normal;
+    font-display: swap;
 }
 
 :root {
     /* 폰트 이름을 `@font-face`와 동일하게 설정 */
-    --font-family: 'Koddi UD OnGothic', sans-serif;
+    --font-family: 'KoddiudOngodic', sans-serif;
     --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
     font-size: 16px; /* 데스크톱 기본 폰트 크기 설정 */
 }
