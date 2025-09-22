@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>어두운 방</title>
+    <title>타자기 효과 게임북</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="start-screen">
-        <div id="introImageContainer" class="image-container"></div>
+        <div id="introImageContainer" class="image-container" data-image="다락방2.png"></div>
         <p>이야기를 시작하려면 버튼을 눌러주세요.</p>
         <button id="startButton" class="option-button">게임 시작하기</button>
     </div>
 
     <div id="game-content" class="game-container">
+        <div id="imageContainer" class="image-container">
+            <img id="draggableImage" src="" alt="게임 배경 이미지" draggable="false">
+        </div>
         <div id="storyText" class="story-text"></div>
-        <div id="imageContainer" class="image-container"></div>
         <div id="optionsContainer" class="options-container"></div>
     </div>
 
     <template id="start">
-        <div class="page-data" data-image="https://placehold.co/1600x900/34495e/ffffff?text=어두운+숲+속">
+        <div class="page-data" data-image="다락방1.png">
             <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
             <div class="options">
                 <button data-next="page2">왼쪽 길로 간다</button>

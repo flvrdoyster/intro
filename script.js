@@ -1,16 +1,30 @@
+// JavaScript file 구성:
+// 1. 전역 변수 및 DOM 요소 캐싱
+// 2. 게임 시작 및 페이지 초기화 함수 (initGame)
+// 3. 타자기 효과 함수 (typewriterEffect)
+// 4. 페이지 전환 및 콘텐츠 표시 함수 (showPage)
+// 5. 이벤트 리스너 설정
+
 // 전역 변수 및 DOM 요소 캐싱
 const storyTextElement = document.getElementById('storyText');
 const optionsContainerElement = document.getElementById('optionsContainer');
 const imageContainerElement = document.getElementById('imageContainer');
 const startScreenElement = document.getElementById('start-screen');
 const gameContentElement = document.getElementById('game-content');
-// 인트로 페이지 이미지 컨테이너를 캐싱합니다.
 const introImageContainerElement = document.getElementById('introImageContainer');
 let typingInterval;
 
 // 타자기 소리 파일 경로
 const typewriterSound = "./typewriter-1.mp3";
 let sound;
+
+// 드래그 가능한 이미지 요소를 캐싱합니다.
+const draggableImage = document.getElementById('draggableImage');
+
+// 드래그 상태를 관리하는 변수
+let isDragging = false;
+let startX, startY;
+let currentX = 0, currentY = 0;
 
 // 게임 시작을 위한 초기화 함수
 // 사용자의 첫 상호작용 후 호출되어 소리 재생 권한을 얻고 게임을 시작합니다.
@@ -78,15 +92,14 @@ function showPage(pageId) {
     optionsContainerElement.innerHTML = '';
 
     // 이미지 업데이트
-    imageContainerElement.style.backgroundImage = `url('${imageUrl}')`;
-
-    // 인트로 페이지의 경우, 시작 화면의 이미지도 설정합니다.
-    if (pageId === 'start') {
-        if (introImageContainerElement) {
-            introImageContainerElement.style.backgroundImage = `url('${imageUrl}')`;
-        }
+    if (draggableImage) {
+        draggableImage.src = imageUrl;
+        // 드래그 위치 초기화
+        currentX = 0;
+        currentY = 0;
+        draggableImage.style.transform = `translate(0, 0)`;
     }
-
+    
     // 텍스트에 타자기 효과 적용
     typewriterEffect(textContent, () => {
         // 텍스트 표시가 완료되면 선택지 버튼을 생성하고 표시합니다.
@@ -105,6 +118,82 @@ function showPage(pageId) {
     });
 }
 
+// 이미지 드래그 시작 함수
+function startDrag(e) {
+    e.preventDefault();
+    isDragging = true;
+    draggableImage.classList.add('is-dragging');
+
+    // 마우스 이벤트의 시작 좌표 저장
+    startX = e.clientX || e.touches[0].clientX;
+    startY = e.clientY || e.touches[0].clientY;
+
+    // 마우스 이동 및 종료 이벤트 리스너 추가
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', stopDrag);
+}
+
+// 이미지 드래그 중 함수
+function drag(e) {
+    if (!isDragging) return;
+
+    // 현재 마우스/터치 좌표
+    const currentDragX = e.clientX || e.touches[0].clientX;
+    const currentDragY = e.clientY || e.touches[0].clientY;
+
+    // 이동 거리 계산
+    const deltaX = currentDragX - startX;
+    const deltaY = currentDragY - startY;
+
+    // 이미지 위치 업데이트
+    currentX += deltaX;
+    currentY += deltaY;
+
+    // 이미지 컨테이너 크기
+    const containerWidth = imageContainerElement.offsetWidth;
+    const containerHeight = imageContainerElement.offsetHeight;
+
+    // 이미지의 실제 크기 (object-fit: cover로 인해 계산 필요)
+    const imageRatio = 16 / 9; // 이미지의 원래 비율
+    const containerRatio = containerWidth / containerHeight;
+
+    let imageWidth, imageHeight;
+    if (containerRatio > imageRatio) {
+        imageWidth = containerWidth;
+        imageHeight = containerWidth / imageRatio;
+    } else {
+        imageWidth = containerHeight * imageRatio;
+        imageHeight = containerHeight;
+    }
+
+    // 경계 조건 설정 (이미지가 컨테이너 밖으로 완전히 벗어나지 않도록)
+    const minX = containerWidth - imageWidth;
+    const minY = containerHeight - imageHeight;
+    currentX = Math.min(0, Math.max(currentX, minX));
+    currentY = Math.min(0, Math.max(currentY, minY));
+
+    // CSS transform으로 위치 적용
+    draggableImage.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+    // 다음 드래그를 위해 시작 좌표 업데이트
+    startX = currentDragX;
+    startY = currentDragY;
+}
+
+// 이미지 드래그 종료 함수
+function stopDrag() {
+    isDragging = false;
+    draggableImage.classList.remove('is-dragging');
+
+    // 이벤트 리스너 제거
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', stopDrag);
+    document.removeEventListener('touchmove', drag);
+    document.removeEventListener('touchend', stopDrag);
+}
+
 // 페이지 로드 시 "게임 시작하기" 버튼에 이벤트 리스너 추가
 document.addEventListener('DOMContentLoaded', () => {
     // 인트로 페이지 이미지 설정
@@ -119,4 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 시작 버튼 클릭 이벤트 설정
     document.getElementById('startButton').onclick = initGame;
+    
+    // 드래그 이벤트 리스너 추가
+    if (draggableImage) {
+        draggableImage.addEventListener('mousedown', startDrag);
+        draggableImage.addEventListener('touchstart', startDrag);
+    }
 });
