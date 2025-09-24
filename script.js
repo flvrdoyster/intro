@@ -17,9 +17,10 @@ const heartContainerElement = document.getElementById('heart-container');
 let typingInterval;
 let hearts = 3;
 
-// 타자기 소리 파일 경로
-const typewriterSound = "./typewriter-1.mp3";
-let sound;
+// 오디오 요소 캐싱
+const typewriterSound = new Audio("mp3/typewriter.mp3"); // New Audio() is already here
+const correctSound = document.getElementById('correctSound');
+const incorrectSound = document.getElementById('incorrectSound');
 
 // 하트 업데이트 및 이미지 투명도 조절 함수
 function updateHearts() {
@@ -42,6 +43,8 @@ function updateHearts() {
     }
 }
 
+
+
 // 게임 오버 함수
 function gameOver() {
     gameContentElement.style.display = 'none';
@@ -55,7 +58,7 @@ function gameOver() {
 
 // 게임 시작을 위한 초기화 함수
 function initGame() {
-    sound = new Audio(typewriterSound);
+    // Corrected: sound = new Audio(typewriterSound);
     startScreenElement.style.display = 'none';
     gameContentElement.style.display = 'flex';
     updateHearts();
@@ -68,11 +71,12 @@ function typewriterEffect(text, onComplete) {
     storyTextElement.innerHTML = '';
     clearInterval(typingInterval);
 
-    if (sound) {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.volume = 0.5;
-        sound.play().catch(e => console.error("Sound playback failed:", e));
+    // Corrected: use typewriterSound directly
+    if (typewriterSound) {
+        typewriterSound.pause();
+        typewriterSound.currentTime = 0;
+        typewriterSound.volume = 0.5;
+        typewriterSound.play().catch(e => console.error("Sound playback failed:", e));
     }
 
     typingInterval = setInterval(() => {
@@ -81,8 +85,8 @@ function typewriterEffect(text, onComplete) {
             i++;
         } else {
             clearInterval(typingInterval);
-            if (sound) {
-                sound.pause();
+            if (typewriterSound) {
+                typewriterSound.pause();
             }
             storyTextElement.innerHTML += '<span class="typing-cursor">|</span>';
             onComplete();
@@ -124,8 +128,14 @@ function showPage(pageId) {
             button.onclick = () => {
                 if (hasCorrectAttribute) {
                     if (isCorrect) {
+                        // 정답일 때
+                        correctSound.currentTime = 0;
+                        correctSound.play().catch(e => console.error("Sound playback failed:", e));
                         showPage(nextId);
                     } else {
+                        // 오답일 때
+                        incorrectSound.currentTime = 0;
+                        incorrectSound.play().catch(e => console.error("Sound playback failed:", e));
                         hearts--;
                         updateHearts();
                         if (hearts <= 0) {

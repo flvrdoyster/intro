@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타자기 효과 게임북</title>
+    <title>아이엠 그라운드</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <audio id="correctSound" src="mp3/true.mp3" preload="auto"></audio>
+    <audio id="incorrectSound" src="mp3/false.mp3" preload="auto"></audio>
     <div id="heart-container">
-        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        <svg class="heart-svg" viewBox="0 0 16 16" fill="red">
+            <path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" />
         </svg>
-        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        <svg class="heart-svg" viewBox="0 0 16 16" fill="red">
+            <path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" />
         </svg>
-        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        <svg class="heart-svg" viewBox="0 0 16 16" fill="red">
+            <path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" />
         </svg>
     </div>
     
     <div id="start-screen">
-        <p>이야기를 시작하려면 버튼을 눌러주세요.</p>
+        <p>아이엠 그라운드. 자기소개 하기.</p>
         <div id="introImageContainer" class="image-container">
-            <img id="introImage" src="다락방1.png">
+            <img id="introImage" src="img/intro.jpg">
         </div>
         <p>
-        <button id="startButton" class="option-button">게임 시작하기</button>
+        <button id="startButton" class="option-button">뭐야 이게</button>
         </p>
     </div>
 
@@ -42,49 +43,41 @@
     </div>
 
     <template id="start">
-        <div class="page-data" data-image="다락방2.png">
-            <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
+        <div class="page-data" data-image="img/q1.png">
+            <p>이건 지금 소개하려는 사람과 관련이 있는 물건입니다. 무엇일까요?</p>
             <div class="options">
-                <button data-next="page2" data-correct="true">왼쪽 길로 간다</button>
-                <button data-next="page3" data-correct="true">오른쪽 길로 간다</button>
+                <button data-next="page2" data-correct="false">기네스 캔맥주</button>
+                <button data-next="page2" data-correct="true">고양이 등</button>
             </div>
         </div>
     </template>
 
+    <template id="page2">
+        <div class="page-data" data-image="/img/a1.png">
+            <p>이건 고양이 등이었습니다.</p>
+            <div class="options">
+                <button data-next="page3">뭐야 그게</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page3">
+        <div class="page-data" data-image="/img/a1.png">
+            <p>테스트용</p>
+            <div class="options">
+                <button data-next="page4" data-correct="false">틀림</button>
+                <button data-next="page5" data-correct="true">맞음</button>
+            </div>
+        </div>
+    </template>
+
+<!--     
     <template id="page2">
         <div class="page-data" data-image="https://placehold.co/1600x900/2c3e50/ffffff?text=낡은+오두막">
             <p>당신은 왼쪽 길을 택했고, 길은 점점 더 어두워집니다. 갑자기 낡은 오두막이 눈에 들어왔습니다. 오두막에 들어가 보시겠습니까?</p>
             <div class="options">
                 <button data-next="page4" data-correct="false">오두막으로 들어간다</button>
                 <button data-next="page5" data-correct="true">오두막을 지나 계속 걷는다</button>
-            </div>
-        </div>
-    </template>
-
-    <template id="page3">
-        <div class="page-data" data-image="https://placehold.co/1600x900/27ae60/ffffff?text=빛나는+숲">
-            <p>당신은 오른쪽 길을 택했고, 길은 빛으로 가득합니다. 멀리서 반짝이는 보물 상자가 보입니다. 다가가 보시겠습니까?</p>
-            <div class="options">
-                <button data-next="end_treasure" data-correct="true">보물 상자 쪽으로 간다</button>
-                <button data-next="end_safe" data-correct="false">다른 길을 찾아본다</button>
-            </div>
-        </div>
-    </template>
-
-    <template id="page4">
-        <div class="page-data" data-image="https://placehold.co/1600x900/8e44ad/ffffff?text=마법서">
-            <p>낡은 오두막 안으로 들어서자, 오래된 마법서가 보입니다. 마법서를 펼쳐보니 강력한 마법을 배우게 되어 당신의 모험은 성공적으로 끝났습니다! 🎉</p>
-            <div class="options">
-                <button data-next="start" data-correct="true">다시 시작하기</button>
-            </div>
-        </div>
-    </template>
-
-    <template id="page5">
-        <div class="page-data" data-image="https://placehold.co/1600x900/c0392b/ffffff?text=낭떠러지">
-            <p>오두막을 지나 계속 걸었습니다. 하지만 길은 낭떠러지로 이어져 있었고, 당신은 발을 헛디뎌 모험을 끝내게 되었습니다. 💀</p>
-            <div class="options">
-                <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
     </template>
@@ -96,7 +89,8 @@
                 <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
-    </template>
+    </template> 
+-->
 
     <template id="end_safe">
         <div class="page-data" data-image="https://placehold.co/1600x900/3498db/ffffff?text=평화로운+마을">

@@ -20,8 +20,8 @@ html, body {
 }
 
 body {
-    background-color: #2b2b2b;
-    color: #d1d1d1;
+    background-color: rgb(240, 240, 240);
+    color: rgb(0, 0, 0);
     display: block;
     position: relative;
     min-height: 100vh;
@@ -36,7 +36,7 @@ body {
     transform: translateX(-50%);
     z-index: 1000;
     padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
 
@@ -53,11 +53,11 @@ body {
 
 /* 하트 수에 따른 이미지 필터 효과 */
 .image-filter-low {
-    filter: blur(8px); /* 하트 3개 (가장 흐릿함) */
+    filter: blur(15px); /* 하트 3개 (가장 흐릿함) */
 }
 
 .image-filter-medium {
-    filter: blur(4px); /* 하트 2개 (중간 흐림) */
+    filter: blur(8px); /* 하트 2개 (중간 흐림) */
 }
 
 .image-filter-high {
@@ -81,7 +81,7 @@ body {
 }
 
 .game-container {
-    width: 90%;
+    width: 60%;
     max-width: 1600px;
     height: calc(100vh - 120px);
     top: 100px;
@@ -99,14 +99,14 @@ body {
 .game-story-section {
     display: flex;
     flex-direction: column;
-    background-color: #1e1e1e;
+    background-color: rgb(255, 255, 255);
     border-radius: 12px;
     padding: 5vh 20px;
     overflow-y: auto;
 }
 
 .image-container {
-    width: 80%;
+    width: 60%;
     max-height: 40vh;
     height: auto;
     border-radius: 8px;
@@ -131,22 +131,9 @@ body {
     overflow-y: visible;
     white-space: pre-wrap;
     padding-right: 15px;
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     margin-top: 2vh;
-}
-
-.story-text::-webkit-scrollbar {
-    width: 8px;
-}
-
-.story-text::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 4px;
-}
-
-.story-text::-webkit-scrollbar-track {
-    background-color: #1e1e1e;
 }
 
 .typing-cursor {
