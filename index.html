@@ -8,26 +8,45 @@
 </head>
 <body>
 
+    <div id="heart-container">
+        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <svg class="heart-svg" viewBox="0 0 24 24" fill="red">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+    </div>
+    
     <div id="start-screen">
-        <div id="introImageContainer" class="image-container" data-image="다락방2.png"></div>
         <p>이야기를 시작하려면 버튼을 눌러주세요.</p>
+        <div id="introImageContainer" class="image-container">
+            <img id="introImage" src="다락방1.png">
+        </div>
+        <p>
         <button id="startButton" class="option-button">게임 시작하기</button>
+        </p>
     </div>
 
     <div id="game-content" class="game-container">
-        <div id="imageContainer" class="image-container">
-            <img id="draggableImage" src="" alt="게임 배경 이미지" draggable="false">
-        </div>
+        <div class="game-story-section">
+
+            <div id="imageContainer" class="image-container">
+                <img id="gameImage" src="">
+            </div>
         <div id="storyText" class="story-text"></div>
+        </div>
         <div id="optionsContainer" class="options-container"></div>
     </div>
 
     <template id="start">
-        <div class="page-data" data-image="다락방1.png">
+        <div class="page-data" data-image="다락방2.png">
             <p>당신은 어두운 숲 속에서 눈을 떴습니다. 갈림길이 나타났는데, 어느 쪽으로 가시겠습니까?</p>
             <div class="options">
-                <button data-next="page2">왼쪽 길로 간다</button>
-                <button data-next="page3">오른쪽 길로 간다</button>
+                <button data-next="page2" data-correct="true">왼쪽 길로 간다</button>
+                <button data-next="page3" data-correct="true">오른쪽 길로 간다</button>
             </div>
         </div>
     </template>
@@ -36,8 +55,8 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/2c3e50/ffffff?text=낡은+오두막">
             <p>당신은 왼쪽 길을 택했고, 길은 점점 더 어두워집니다. 갑자기 낡은 오두막이 눈에 들어왔습니다. 오두막에 들어가 보시겠습니까?</p>
             <div class="options">
-                <button data-next="page4">오두막으로 들어간다</button>
-                <button data-next="page5">오두막을 지나 계속 걷는다</button>
+                <button data-next="page4" data-correct="false">오두막으로 들어간다</button>
+                <button data-next="page5" data-correct="true">오두막을 지나 계속 걷는다</button>
             </div>
         </div>
     </template>
@@ -46,8 +65,8 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/27ae60/ffffff?text=빛나는+숲">
             <p>당신은 오른쪽 길을 택했고, 길은 빛으로 가득합니다. 멀리서 반짝이는 보물 상자가 보입니다. 다가가 보시겠습니까?</p>
             <div class="options">
-                <button data-next="end_treasure">보물 상자 쪽으로 간다</button>
-                <button data-next="end_safe">다른 길을 찾아본다</button>
+                <button data-next="end_treasure" data-correct="true">보물 상자 쪽으로 간다</button>
+                <button data-next="end_safe" data-correct="false">다른 길을 찾아본다</button>
             </div>
         </div>
     </template>
@@ -56,7 +75,7 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/8e44ad/ffffff?text=마법서">
             <p>낡은 오두막 안으로 들어서자, 오래된 마법서가 보입니다. 마법서를 펼쳐보니 강력한 마법을 배우게 되어 당신의 모험은 성공적으로 끝났습니다! 🎉</p>
             <div class="options">
-                <button data-next="start">다시 시작하기</button>
+                <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
     </template>
@@ -65,7 +84,7 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/c0392b/ffffff?text=낭떠러지">
             <p>오두막을 지나 계속 걸었습니다. 하지만 길은 낭떠러지로 이어져 있었고, 당신은 발을 헛디뎌 모험을 끝내게 되었습니다. 💀</p>
             <div class="options">
-                <button data-next="start">다시 시작하기</button>
+                <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
     </template>
@@ -74,7 +93,7 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/f1c40f/ffffff?text=황금+열쇠">
             <p>보물 상자를 열자, 상자 안에는 빛나는 황금 열쇠가 들어있습니다. 이 열쇠는 당신의 집으로 돌아가는 문을 열어줍니다. 당신은 안전하게 집으로 돌아왔습니다! 🏡</p>
             <div class="options">
-                <button data-next="start">다시 시작하기</button>
+                <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
     </template>
@@ -83,7 +102,7 @@
         <div class="page-data" data-image="https://placehold.co/1600x900/3498db/ffffff?text=평화로운+마을">
             <p>빛나는 상자를 무시하고 다른 길을 찾았습니다. 길은 안전한 마을로 이어졌고, 당신은 따뜻한 환영을 받으며 새로운 삶을 시작하게 되었습니다! 😊</p>
             <div class="options">
-                <button data-next="start">다시 시작하기</button>
+                <button data-next="start" data-correct="true">다시 시작하기</button>
             </div>
         </div>
     </template>

@@ -1,17 +1,3 @@
-/* ----------------------------------------------------
-       CSS 파일 구성
-    ---------------------------------------------------- */
-/*
-  1. 웹 폰트 설정
-  2. 전역 스타일 (html, body)
-  3. 레이아웃 및 컴포넌트 스타일
-  4. 반응형 디자인 (미디어 쿼리)
-*/
-
-/* ----------------------------------------------------
-  1. 웹 폰트 설정
-  'Koddi UD OnGothic' 폰트를 로드합니다.
----------------------------------------------------- */
 @font-face {
     font-family: 'Koddi UD OnGothic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
@@ -21,92 +7,128 @@
 
 :root {
     --font-family: 'Koddi UD OnGothic', sans-serif;
-    --main-font-size: 1.25rem; /* 본문과 버튼의 폰트 크기를 통일 */
-    font-size: 30px; /* 데스크톱 기본 폰트 크기 설정 */
+    --main-font-size: 1rem;
+    font-size: 30px;
+    --image-aspect-ratio-desktop: 4 / 3;
+    --image-aspect-ratio-mobile: 4 / 3;
 }
 
-/* ----------------------------------------------------
-  2. 전역 스타일 (html, body)
-  전체 페이지의 배경, 글꼴, 레이아웃을 설정합니다.
----------------------------------------------------- */
-* {
-    font-family: var(--font-family); /* 모든 요소에 폰트 강제 적용 */
+html, body {
+    font-family: var(--font-family);
+    height: 100%;
+    min-height: 100vh;
 }
 
 body {
     background-color: #2b2b2b;
     color: #d1d1d1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
+    position: relative;
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    flex-direction: column;
 }
 
-/* ----------------------------------------------------
-  3. 레이아웃 및 컴포넌트 스타일
-  게임북의 각 요소(컨테이너, 이미지, 텍스트, 버튼)의 디자인을 정의합니다.
----------------------------------------------------- */
+#heart-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+}
+
+.heart-svg {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    fill: red;
+}
+
+.heart-svg.empty {
+    fill: #555;
+}
+
+/* 하트 수에 따른 이미지 필터 효과 */
+.image-filter-low {
+    filter: blur(8px); /* 하트 3개 (가장 흐릿함) */
+}
+
+.image-filter-medium {
+    filter: blur(4px); /* 하트 2개 (중간 흐림) */
+}
+
+.image-filter-high {
+    filter: blur(0px); /* 하트 1개 (가장 선명함) */
+}
+
 #start-screen {
+    position: absolute;
+    top: 100px;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
+    overflow-y: auto;
 }
 
 .game-container {
     width: 90%;
     max-width: 1600px;
-    height: 95vh;
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    padding: 1.5vh 20px;
+    height: calc(100vh - 120px);
+    top: 100px;
+    bottom: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: auto;
+    padding: 0 20px;
     display: none;
     flex-direction: column;
     gap: 1.5rem;
 }
 
+.game-story-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 5vh 20px;
+    overflow-y: auto;
+}
+
 .image-container {
-    width: 100%;
+    width: 80%;
     max-height: 40vh;
     height: auto;
-    aspect-ratio: 16 / 9;
     border-radius: 8px;
-    background-color: #333;
-    /* overflow: hidden; 속성을 제거합니다. */
-    border: 2px solid #555;
+    overflow: hidden;
     background-size: cover;
     background-position: center;
-    position: relative; /* 자식 요소의 위치를 제어하기 위해 추가 */
-    margin: 0 auto; /* 이 속성을 추가하여 컨테이너를 가운데 정렬합니다. */
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    aspect-ratio: var(--image-aspect-ratio-desktop);
 }
 
-/* 드래그 가능한 이미지에 대한 스타일 */
 .image-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    cursor: grab;
-}
-
-/* 드래그 중인 상태를 시각적으로 표시 */
-.image-container img.is-dragging {
-    cursor: grabbing;
+    object-fit: contain;
 }
 
 .story-text {
     font-size: var(--main-font-size);
     line-height: 1.6;
-    height: 25vh;
-    overflow-y: auto;
+    height: auto;
+    overflow-y: visible;
     white-space: pre-wrap;
     padding-right: 15px;
     width: 80%;
@@ -117,10 +139,12 @@ body {
 .story-text::-webkit-scrollbar {
     width: 8px;
 }
+
 .story-text::-webkit-scrollbar-thumb {
     background-color: #555;
     border-radius: 4px;
 }
+
 .story-text::-webkit-scrollbar-track {
     background-color: #1e1e1e;
 }
@@ -135,30 +159,42 @@ body {
     50% { color: #d1d1d1; }
 }
 
+/* 선택지 버튼 컨테이너: 버튼들을 담는 컨테이너입니다. */
 .options-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 1rem;
-    min-height: 150px;
-    width: 90%;
-    margin: 0 auto;
+    min-height: auto;
+    padding: 2vh 0;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1600px;
+    z-index: 999;
 }
 
+/* 선택지 버튼 스타일 */
 .option-button {
     background-color: #4a4a4a;
     color: #ffffff;
     font-size: var(--main-font-size);
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 8px;
     transition: transform 0.2s, background-color 0.2s;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
     font-family: var(--font-family);
-    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* min-width 속성 제거 */
+    /* flex-shrink 속성 제거 */
+    flex-basis: auto; /* 버튼의 기본 너비를 자동으로 설정하여 유연하게 만듦 */
 }
 
 .option-button:hover {
@@ -170,10 +206,6 @@ body {
     transform: translateY(0);
 }
 
-/* ----------------------------------------------------
-  4. 반응형 디자인 (미디어 쿼리)
-  화면 크기에 따라 레이아웃을 조절합니다.
----------------------------------------------------- */
 @media (max-width: 1600px) {
     .game-container {
         width: 95%;
@@ -183,28 +215,36 @@ body {
 
 @media (max-width: 640px) {
     :root {
-        font-size: 14px;
-        --main-font-size: 1.1rem;
+        font-size: 16px;
+        --main-font-size: 1.25rem;
     }
+
     .game-container {
         padding: 1vh 10px;
         width: 95%;
         max-width: 800px;
     }
+
     .image-container {
         max-height: 30vh;
         height: auto;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: var(--image-aspect-ratio-mobile);
     }
+
     .story-text {
-        height: 20vh;
+        height: auto;
+        min-height: 100px;
         font-size: var(--main-font-size);
         width: 95%;
     }
+
     .options-container {
-        min-height: 20vh;
+        min-height: auto;
+        padding: 10px;
         width: 95%;
+        max-width: 800px;
     }
+
     .option-button {
         font-size: var(--main-font-size);
         padding: 0.6rem 1.2rem;
